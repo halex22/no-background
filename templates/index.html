@@ -8,6 +8,12 @@
 
   <style>
 
+    #preview {
+      max-width: 10rem;
+      max-height: auto;
+      margin: 1rem 0;
+    }
+
     #submit-btn {
       color: white;
       background-color: black;
@@ -96,9 +102,12 @@
       <section id="dropZone" class="drop-zone">
         <form action="/" method="post" enctype="multipart/form-data" id="uploadForm">
           <label for="">click this zone to upload a file</label>
-          <input type="file" style="display: block;" id="fileInput" name="file">
-          
+          <input type="file" style="display: none;" id="fileInput" name="file"
+          onchange="document.getElementById('preview').src = window.URL.createObjectURL(this.files[0])">
+          <!-- <input type="file" style="display: display;" id="falseInput" > -->
         </form>
+
+        <img src="" alt="image_preview" id="preview">
       </section>
       
     </div>
