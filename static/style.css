@@ -1,0 +1,76 @@
+#preview {
+  max-width: 10rem;
+  max-height: auto;
+  margin: 1rem 0;
+}
+
+#submit-btn {
+  color: white;
+  background-color: black;
+  padding: 10px 16px;
+  border-radius: 1rem;
+}
+
+#submit-btn:hover {
+  background-color: #262525;
+}
+
+svg {
+  width: 4rem;
+  height: auto;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+}
+
+#description {
+  font-size: 1.5rem;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+.center-p {
+  text-align: center;
+}
+
+#form-container {
+  border: 0.125rem dotted rgb(81, 80, 80);
+  padding: 5% 20%;
+}
+
+.drop-zone {
+  border: 2px dashed #ccc;
+  padding: 4rem 12rem;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 688px) {
+  .drop-zone {
+    padding: 3rem 6rem;
+  }
+
+  #description {
+    font-size: 1rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+}
+
+.drop-zone.dragover {
+  background-color: #f0f0f0;
+}
+
+#form-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+#submit-btn {
+  margin-top: 1rem;
+}
