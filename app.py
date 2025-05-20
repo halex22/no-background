@@ -6,6 +6,7 @@ from rembg import remove
 
 app = Flask(__name__)
 
+
 def process_file(file):
     in_img = Image.open(file.stream)
     out_img = remove(in_img, post_process_mask=True)
@@ -14,7 +15,9 @@ def process_file(file):
     img_io.seek(0)
     return img_io
 
+
 OUTPUT_NAME = '_no_background_img.png'
+
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -26,9 +29,22 @@ def home():
             return 'No file selected', 400
         if file:
             processed_img = process_file(file)
-            return send_file(processed_img, mimetype='image/png', as_attachment=True, download_name=OUTPUT_NAME)   
+            return send_file(processed_img, mimetype='image/png', as_attachment=True, download_name=OUTPUT_NAME)
     return render_template('index.html')
 
-@app.route('/health-test')
+
+@app.route('/process', methods=['POST'])
+def process():
+    if 'file' not in request.files:
+        return 'No file uploaded', 400
+    file = request.files['file']
+    if not file.filename:
+        return 'No file selected', 400
+    if file:
+        processed_img = process_file(file)
+        return send_file(processed_img, mimetype='image/png', as_attachment=True, download_name=OUTPUT_NAME)
+
+
+@app.route('/health-test', methods=['GET'])
 def test():
     return "I'm ok", 200
