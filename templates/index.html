@@ -4,87 +4,79 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="{{url_for('static', filename='icon.png')}}" type="image/x-icon">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename="output.css")}}">
+  <script src="{{ url_for('static', filename='main.js')}}" defer></script>
   <title>BG remover</title>
 </head>
 
 <body>
+  <div id="app"></div>
   <main>
-      <h1 class="text-black font-bold text-center mt-4">Hi Everybody</h1>
+    <hgroup class="greeting">
+      <h1>Background removal</h1>
+      <article>
+        <p>Hi and welcome to my app, please feel free to use it</p>
+        <p>load any image and remove the background from it.</p>
+      </article>
+    </hgroup>
 
-      <p id="description">Welcome to my Background remover for the second time <br> please feel free to load any image
-        to
-        remove the background from it.
-      </p>
 
+    <form class="mt-6" enctype="multipart/form-data">
+      <div id="dropzone" class="flex items-center justify-center w-full">
+        <label id="dropzoneFileLabel" for="dropzone-file">
+          <div id="uploadInstructions" class="form-svg-container">
+            <svg class="w-8 h-8 mb-4 text-gray-500 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+              viewBox="0 0 20 16">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+            </svg>
+            <p class="mb-2 text-sm text-gray-500 "><span class="font-semibold">Click to upload</span>
+              or drag and drop</p>
+            <p class="text-xs text-gray-500 ">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+          </div>
 
+          <div id="previewHolder" class="img-preview">
+            <span class="remove-img hidden" id="removePreview">x</span>
+          </div>
 
-    <div id="form-wrapper" class="px-12">
-      <section id="dropZone" class="drop-zone">
-        <form action="/" method="post" enctype="multipart/form-data" id="uploadForm">
-          <!-- <label for="">click this zone to upload a file</label>
-          <input type="file" style="display: none;" id="fileInput" name="file"
-          onchange="document.getElementById('preview').src = window.URL.createObjectURL(this.files[0])"> -->
-          <!-- <input type="file" style="display: display;" id="falseInput" > -->
+          <input id="dropzone-file" type="file" class="hidden" name="image" />
 
-          
-          <div class="flex items-center justify-center w-full">
-              <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50  hover:bg-gray-100 ">
-                  <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                      <svg class="w-8 h-8 mb-4 text-gray-500 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
-                      </svg>
-                      <p class="mb-2 text-sm text-gray-500 "><span class="font-semibold">Click to upload</span> or drag and drop</p>
-                      <p class="text-xs text-gray-500 ">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
-                  </div>
-                  <input id="dropzone-file" type="file" class="hidden" />
-              </label>
-          </div> 
+        </label>
 
-        </form>
+      </div>
 
-        <!-- <img src="" alt="image_preview" id="preview"> -->
-      </section>
-      
+      <div class="btn-container">
+        <button class="smt-btn" type="submit">
+          <span class="btn-text">remove background</span>
+        </button>
+      </div>
+    </form>
+
+    <div id="loader">
+
     </div>
-    
-    <div id="btn-container" class="flex justify-center">
-      <button class="bg-slate-500" id="submit-btn" type="submit">
-        <span class="text-white">Remove Background</span>
-      </button>
+
     </div>
 
-    <!-- <section id="socials">
+    <aside class="skills text-center mt-8">
+      <span class="text-2xl me-2 text main-text">My skill </span>
+      <span class="text-2xl text secondary-text">JavaScript</span>
+    </aside>
 
-      <p class="center-p ">
-        please click in one of my socials to see my latest updates
-      </p>
-
-      <div id="icons-container" class="">
-        <a href="https://www.linkedin.com/in/hugo-martínez-9521b5268/" target="_blank">
-          <svg fill="#000000" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg">
-            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-            <g id="SVGRepo_iconCarrier">
-              <title>linkedin</title>
-              <path
-                d="M28.778 1.004h-25.56c-0.008-0-0.017-0-0.027-0-1.199 0-2.172 0.964-2.186 2.159v25.672c0.014 1.196 0.987 2.161 2.186 2.161 0.010 0 0.019-0 0.029-0h25.555c0.008 0 0.018 0 0.028 0 1.2 0 2.175-0.963 2.194-2.159l0-0.002v-25.67c-0.019-1.197-0.994-2.161-2.195-2.161-0.010 0-0.019 0-0.029 0h0.001zM9.9 26.562h-4.454v-14.311h4.454zM7.674 10.293c-1.425 0-2.579-1.155-2.579-2.579s1.155-2.579 2.579-2.579c1.424 0 2.579 1.154 2.579 2.578v0c0 0.001 0 0.002 0 0.004 0 1.423-1.154 2.577-2.577 2.577-0.001 0-0.002 0-0.003 0h0zM26.556 26.562h-4.441v-6.959c0-1.66-0.034-3.795-2.314-3.795-2.316 0-2.669 1.806-2.669 3.673v7.082h-4.441v-14.311h4.266v1.951h0.058c0.828-1.395 2.326-2.315 4.039-2.315 0.061 0 0.121 0.001 0.181 0.003l-0.009-0c4.5 0 5.332 2.962 5.332 6.817v7.855z">
-              </path>
-            </g>
-          </svg>
-        </a>
-        
-        <a href="https://github.com/halex22" target="_blank">
+    <footer>
+      <div class="svg-container">
+        <a href="https://github.com/halex22" target="_blank" rel="noopener noreferrer">
           <svg viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000">
+          xmlns:xlink="http://www.w3.org/1999/xlink" >
           <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
           <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
           <g id="SVGRepo_iconCarrier">
             <title>github [#142]</title>
             <desc>Created with Sketch.</desc>
             <defs> </defs>
-            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-              <g id="Dribbble-Light-Preview" transform="translate(-140.000000, -7559.000000)" fill="#000000">
+            <g id="Page1" stroke="none" stroke-width="1" >
+              <g id="Dribbble-Light-Preview" transform="translate(-140.000000, -7559.000000)">
                 <g id="icons" transform="translate(56.000000, 160.000000)">
                   <path
                     d="M94,7399 C99.523,7399 104,7403.59 104,7409.253 C104,7413.782 101.138,7417.624 97.167,7418.981 C96.66,7419.082 96.48,7418.762 96.48,7418.489 C96.48,7418.151 96.492,7417.047 96.492,7415.675 C96.492,7414.719 96.172,7414.095 95.813,7413.777 C98.04,7413.523 100.38,7412.656 100.38,7408.718 C100.38,7407.598 99.992,7406.684 99.35,7405.966 C99.454,7405.707 99.797,7404.664 99.252,7403.252 C99.252,7403.252 98.414,7402.977 96.505,7404.303 C95.706,7404.076 94.85,7403.962 94,7403.958 C93.15,7403.962 92.295,7404.076 91.497,7404.303 C89.586,7402.977 88.746,7403.252 88.746,7403.252 C88.203,7404.664 88.546,7405.707 88.649,7405.966 C88.01,7406.684 87.619,7407.598 87.619,7408.718 C87.619,7412.646 89.954,7413.526 92.175,7413.785 C91.889,7414.041 91.63,7414.493 91.54,7415.156 C90.97,7415.418 89.522,7415.871 88.63,7414.304 C88.63,7414.304 88.101,7413.319 87.097,7413.247 C87.097,7413.247 86.122,7413.234 87.029,7413.87 C87.029,7413.87 87.684,7414.185 88.139,7415.37 C88.139,7415.37 88.726,7417.2 91.508,7416.58 C91.513,7417.437 91.522,7418.245 91.522,7418.489 C91.522,7418.76 91.338,7419.077 90.839,7418.982 C86.865,7417.627 84,7413.783 84,7409.253 C84,7403.59 88.478,7399 94,7399"
@@ -98,26 +90,26 @@
         
       </div>
 
-    </section> -->
 
+      <div class="svg-container" id="linked">
+        <a href="https://www.linkedin.com/in/hugo-martínez-9521b5268" target="_blank" rel="noopener noreferrer">
+          <svg version="1.1" id="Icons" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            viewBox="0 0 32 32" xml:space="preserve">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+              <path
+                d="M23,0H9C4,0,0,4,0,9v14c0,5,4,9,9,9h14c5,0,9-4,9-9V9C32,4,28,0,23,0z M12,25c0,0.6-0.4,1-1,1H7c-0.6,0-1-0.4-1-1V13 c0-0.6,0.4-1,1-1h4c0.6,0,1,0.4,1,1V25z M9,11c-1.7,0-3-1.3-3-3s1.3-3,3-3s3,1.3,3,3S10.7,11,9,11z M26,25c0,0.6-0.4,1-1,1h-3 c-0.6,0-1-0.4-1-1v-3.5v-1v-2c0-0.8-0.7-1.5-1.5-1.5S18,17.7,18,18.5v2v1V25c0,0.6-0.4,1-1,1h-3c-0.6,0-1-0.4-1-1V13 c0-0.6,0.4-1,1-1h4c0.3,0,0.5,0.1,0.7,0.3c0.6-0.2,1.2-0.3,1.8-0.3c3,0,5.5,2.5,5.5,5.5V25z">
+              </path>
+            </g>
+          </svg>
+        </a>
+
+      </div>
+    </footer>
+
+    </p>
   </main>
-
-  <script>
-
-    const dropZone = document.getElementById("dropZone");
-    const fileInput = document.getElementById("fileInput");
-    const uploadForm = document.getElementById("uploadForm");
-    const btn = document.getElementById('submit-btn')
-
-    btn.addEventListener("click", () => {
-      uploadForm.submit()
-    })
-
-    dropZone.addEventListener("click", () => {
-      fileInput.click();
-    });
-
-  </script>
 </body>
 
 </html>
